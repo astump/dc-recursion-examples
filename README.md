@@ -1,9 +1,8 @@
 # A Type-Based Approach to Divide-And-Conquer Recursion in Coq
 
-This README is headered and organized according
-to the POPL'23 recommendations found
-[here](https://popl23.sigplan.org/track/POPL-2023-artifact-evaluation#Author-Recommendations), and is available
-in both [Markdown](./README.md) and [PDF](./README.pdf) format.
+Artifact for POPL'23 paper "A Type-Based Approach to Divide-And-Conquer
+Recursion in Coq". This README is available in both [Markdown](./README.md) and
+[PDF](./README.pdf) format.
 
 
 # Installation
