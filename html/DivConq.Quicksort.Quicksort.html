@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Quicksort.Quicksort</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Quicksort.Quicksort</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab17"></a><h1 class="section">Quicksort</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dc.html#"><span class="id" title="library">Dc</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dci.html#"><span class="id" title="library">Dci</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Kinds.html#"><span class="id" title="library">Kinds</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Mu.html#"><span class="id" title="library">Mu</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.List.List.html#"><span class="id" title="library">List.List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Functors.html#"><span class="id" title="library">Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.List.ExtraLib.html#"><span class="id" title="library">ExtraLib</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Quicksort.PartitionSimple.html#"><span class="id" title="library">PartitionSimple</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Quicksort" class="idref" href="#Quicksort"><span class="id" title="section">Quicksort</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="Quicksort.A" class="idref" href="#Quicksort.A"><span class="id" title="variable">A</span></a> : <span class="id" title="keyword">Set</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="Quicksort.ltA" class="idref" href="#Quicksort.ltA"><span class="id" title="variable">ltA</span></a> : <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="partitionr" class="idref" href="#partitionr"><span class="id" title="definition">partitionr</span></a>{<a id="R:3" class="idref" href="#R:3"><span class="id" title="binder">R</span></a> : <span class="id" title="keyword">Set</span>}(<a id="sfo:4" class="idref" href="#sfo:4"><span class="id" title="binder">sfo</span></a> : <a class="idref" href="DivConq.List.List.html#ListSFoldT"><span class="id" title="definition">ListSFoldT</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#R:3"><span class="id" title="variable">R</span></a>) := <a class="idref" href="DivConq.Quicksort.PartitionSimple.html#partitionr"><span class="id" title="definition">partitionr</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.ltA"><span class="id" title="variable">ltA</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#sfo:4"><span class="id" title="variable">sfo</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="QuicksortAlg" class="idref" href="#QuicksortAlg"><span class="id" title="definition">QuicksortAlg</span></a> : <a class="idref" href="DivConq.List.List.html#ListAlg"><span class="id" title="definition">ListAlg</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> (<a class="idref" href="DivConq.Dc.Functors.html#Const"><span class="id" title="definition">Const</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Dc.html#rollAlg"><span class="id" title="definition">rollAlg</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="R:5" class="idref" href="#R:5"><span class="id" title="binder">R</span></a> <a id="fo:6" class="idref" href="#fo:6"><span class="id" title="binder">fo</span></a> <a id="sfo:7" class="idref" href="#sfo:7"><span class="id" title="binder">sfo</span></a> <a id="qsort:8" class="idref" href="#qsort:8"><span class="id" title="binder">qsort</span></a> <a id="xs:9" class="idref" href="#xs:9"><span class="id" title="binder">xs</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Quicksort.Quicksort.html#xs:9"><span class="id" title="variable">xs</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.List.List.html#Nil"><span class="id" title="constructor">Nil</span></a>       ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="DivConq.List.List.html#Cons"><span class="id" title="constructor">Cons</span></a> <span class="id" title="var">p</span> <span class="id" title="var">xs</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="l:11" class="idref" href="#l:11"><span class="id" title="binder">l</span></a>, <a id="r:12" class="idref" href="#r:12"><span class="id" title="binder">r</span></a>) := <a class="idref" href="DivConq.Quicksort.Quicksort.html#partitionr"><span class="id" title="definition">partitionr</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#sfo:7"><span class="id" title="variable">sfo</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#xs:9"><span class="id" title="variable">xs</span></a> <span class="id" title="var">p</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Quicksort.Quicksort.html#qsort:8"><span class="id" title="variable">qsort</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#l:11"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6"><span class="id" title="notation">++</span></a> <span class="id" title="var">p</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#qsort:8"><span class="id" title="variable">qsort</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#r:12"><span class="id" title="variable">r</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Quicksort" class="idref" href="#Quicksort"><span class="id" title="definition">Quicksort</span></a>(<a id="l:13" class="idref" href="#l:13"><span class="id" title="binder">l</span></a> : <a class="idref" href="DivConq.List.List.html#List"><span class="id" title="definition">List</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@<a class="idref" href="DivConq.Dc.Dc.html#fold"><span class="id" title="definition">fold</span></a> (<a class="idref" href="DivConq.List.List.html#ListF"><span class="id" title="inductive">ListF</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>) (<a class="idref" href="DivConq.Dc.Functors.html#Const"><span class="id" title="definition">Const</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)) (<a class="idref" href="DivConq.Dc.Functors.html#FunConst"><span class="id" title="instance">FunConst</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)) <a class="idref" href="DivConq.Quicksort.Quicksort.html#QuicksortAlg"><span class="id" title="definition">QuicksortAlg</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#l:13"><span class="id" title="variable">l</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="quicksort" class="idref" href="#quicksort"><span class="id" title="definition">quicksort</span></a>(<a id="l:14" class="idref" href="#l:14"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a> := <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort"><span class="id" title="definition">Quicksort</span></a> (<a class="idref" href="DivConq.List.List.html#toList"><span class="id" title="definition">toList</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#l:14"><span class="id" title="variable">l</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Ltac</span> <span class="id" title="var">foldQuicksort</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> (<span class="id" title="tactic">change</span> (<a class="idref" href="DivConq.List.List.html#List"><span class="id" title="definition">List</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>) <span class="id" title="keyword">with</span> (<a class="idref" href="DivConq.Dc.Dc.html#Dc"><span class="id" title="definition">Dc.Dc</span></a> (<a class="idref" href="DivConq.List.List.html#ListF"><span class="id" title="inductive">ListF</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">change</span> (<a class="idref" href="DivConq.Dc.Dc.html#fold"><span class="id" title="definition">fold</span></a> (<a class="idref" href="DivConq.List.List.html#ListF"><span class="id" title="inductive">ListF</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>) (<a class="idref" href="DivConq.Dc.Functors.html#Const"><span class="id" title="definition">Const</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)) (<a class="idref" href="DivConq.Dc.Functors.html#FunConst"><span class="id" title="instance">FunConst</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort.A"><span class="id" title="variable">A</span></a>)) <a class="idref" href="DivConq.Quicksort.Quicksort.html#QuicksortAlg"><span class="id" title="definition">QuicksortAlg</span></a>) <span class="id" title="keyword">with</span> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort"><span class="id" title="definition">Quicksort</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="DivConq.Quicksort.Quicksort.html#Quicksort"><span class="id" title="section">Quicksort</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="DivConq.Quicksort.Quicksort.html#quicksort"><span class="id" title="definition">quicksort</span></a>{<span class="id" title="var">A</span>}.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

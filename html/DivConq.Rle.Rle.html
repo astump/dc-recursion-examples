@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Rle.Rle</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Rle.Rle</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab29"></a><h1 class="section">Run-Length Encoding</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Nat.html#"><span class="id" title="library">Coq.Init.Nat</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dc.html#"><span class="id" title="library">Dc</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dci.html#"><span class="id" title="library">Dci</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Kinds.html#"><span class="id" title="library">Kinds</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Mu.html#"><span class="id" title="library">Mu</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.List.List.html#"><span class="id" title="library">List.List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Functors.html#"><span class="id" title="library">Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.List.ExtraLib.html#"><span class="id" title="library">List.ExtraLib</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Rle.MapThrough.html#"><span class="id" title="library">MapThrough</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Span.Span.html#"><span class="id" title="library">Span</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Rle.Rld.html#"><span class="id" title="library">Rld</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Span.SpanPfs.Forall.html#"><span class="id" title="library">SpanPfs.Forall</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Span.SpanPfs.MotivePres.html#"><span class="id" title="library">SpanPfs.MotivePres</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Span.SpanPfs.Append.html#"><span class="id" title="library">SpanPfs.Append</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We have a naming conflict between Coq.Lists.List.length and (our)
+List.List.length... but we want to use the former, here. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> <a id="length" class="idref" href="#length"><span class="id" title="abbreviation">length</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Lists.List.html#length"><span class="id" title="abbreviation">Coq.Lists.List.length</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="RLE" class="idref" href="#RLE"><span class="id" title="section">RLE</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Set</span>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="RLE.eqb" class="idref" href="#RLE.eqb"><span class="id" title="variable">eqb</span></a> : <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="RLE.eq" class="idref" href="#RLE.eq"><span class="id" title="variable">eq</span></a> : <span class="id" title="keyword">∀</span> <a id="a1:3" class="idref" href="#a1:3"><span class="id" title="binder">a1</span></a> <a id="a2:4" class="idref" href="#a2:4"><span class="id" title="binder">a2</span></a>, <a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <a class="idref" href="DivConq.Rle.Rle.html#a1:3"><span class="id" title="variable">a1</span></a> <a class="idref" href="DivConq.Rle.Rle.html#a2:4"><span class="id" title="variable">a2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Rle.Rle.html#a1:3"><span class="id" title="variable">a1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="DivConq.Rle.Rle.html#a2:4"><span class="id" title="variable">a2</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="compressSpan" class="idref" href="#compressSpan"><span class="id" title="definition">compressSpan</span></a> : <a class="idref" href="DivConq.Rle.MapThrough.html#mappedT"><span class="id" title="definition">mappedT</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="R:6" class="idref" href="#R:6"><span class="id" title="binder">R</span></a> <a id="sfo:7" class="idref" href="#sfo:7"><span class="id" title="binder">sfo</span></a> <a id="hd:8" class="idref" href="#hd:8"><span class="id" title="binder">hd</span></a> <a id="tl:9" class="idref" href="#tl:9"><span class="id" title="binder">tl</span></a> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="p:10" class="idref" href="#p:10"><span class="id" title="binder">p</span></a>, <a id="s:11" class="idref" href="#s:11"><span class="id" title="binder">s</span></a>) := <a class="idref" href="DivConq.Span.Span.html#spanr"><span class="id" title="definition">spanr</span></a> <a class="idref" href="DivConq.Rle.Rle.html#sfo:7"><span class="id" title="variable">sfo</span></a> (<a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <a class="idref" href="DivConq.Rle.Rle.html#hd:8"><span class="id" title="variable">hd</span></a>) <a class="idref" href="DivConq.Rle.Rle.html#tl:9"><span class="id" title="variable">tl</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">((</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Nat.html#succ"><span class="id" title="definition">succ</span></a> (<a class="idref" href="DivConq.Rle.Rle.html#length"><span class="id" title="abbreviation">length</span></a> <a class="idref" href="DivConq.Rle.Rle.html#p:10"><span class="id" title="variable">p</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="DivConq.Rle.Rle.html#hd:8"><span class="id" title="variable">hd</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">),</span></a> <a class="idref" href="DivConq.Rle.Rle.html#s:11"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="RleCarr" class="idref" href="#RleCarr"><span class="id" title="definition">RleCarr</span></a> := <a class="idref" href="DivConq.Dc.Functors.html#Const"><span class="id" title="definition">Const</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="RleAlg" class="idref" href="#RleAlg"><span class="id" title="definition">RleAlg</span></a> : <a class="idref" href="DivConq.List.List.html#ListAlg"><span class="id" title="definition">ListAlg</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RleCarr"><span class="id" title="definition">RleCarr</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Rle.MapThrough.html#MapThroughAlg"><span class="id" title="definition">MapThroughAlg</span></a> <a class="idref" href="DivConq.Rle.Rle.html#compressSpan"><span class="id" title="definition">compressSpan</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Rle" class="idref" href="#Rle"><span class="id" title="definition">Rle</span></a>(<a id="xs:12" class="idref" href="#xs:12"><span class="id" title="binder">xs</span></a> : <a class="idref" href="DivConq.List.List.html#List"><span class="id" title="definition">List</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="DivConq.Dc.Dc.html#fold"><span class="id" title="definition">fold</span></a> (<a class="idref" href="DivConq.List.List.html#ListF"><span class="id" title="inductive">ListF</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>) <a class="idref" href="DivConq.Rle.Rle.html#RleCarr"><span class="id" title="definition">RleCarr</span></a> (<a class="idref" href="DivConq.Dc.Functors.html#FunConst"><span class="id" title="instance">FunConst</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>))) <a class="idref" href="DivConq.Rle.Rle.html#RleAlg"><span class="id" title="definition">RleAlg</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:12"><span class="id" title="variable">xs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="rle" class="idref" href="#rle"><span class="id" title="definition">rle</span></a>(<a id="xs:13" class="idref" href="#xs:13"><span class="id" title="binder">xs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="DivConq.Rle.Rle.html#Rle"><span class="id" title="definition">Rle</span></a> (<a class="idref" href="DivConq.List.List.html#toList"><span class="id" title="definition">toList</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:13"><span class="id" title="variable">xs</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="RldRle" class="idref" href="#RldRle"><span class="id" title="lemma">RldRle</span></a> (<a id="xs:14" class="idref" href="#xs:14"><span class="id" title="binder">xs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>): <a class="idref" href="DivConq.Rle.Rld.html#rld"><span class="id" title="definition">rld</span></a> (<a class="idref" href="DivConq.Rle.Rle.html#Rle"><span class="id" title="definition">Rle</span></a> (<a class="idref" href="DivConq.List.List.html#toList"><span class="id" title="definition">toList</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:14"><span class="id" title="variable">xs</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:14"><span class="id" title="variable">xs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">listInd</span> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> (<span class="id" title="keyword">fun</span> (<a id="X:17" class="idref" href="#X:17"><span class="id" title="binder">X</span></a> : <a class="idref" href="DivConq.List.List.html#List"><span class="id" title="definition">List</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) <a id="xs:18" class="idref" href="#xs:18"><span class="id" title="binder">xs</span></a> ⇒ <a class="idref" href="DivConq.Rle.Rld.html#rld"><span class="id" title="definition">rld</span></a> (<a class="idref" href="DivConq.Rle.Rle.html#Rle"><span class="id" title="definition">Rle</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:16"><span class="id" title="variable">xs</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="DivConq.List.List.html#fromList"><span class="id" title="definition">fromList</span></a> <a class="idref" href="DivConq.Rle.Rle.html#xs:16"><span class="id" title="variable">xs</span></a>) <span class="id" title="var">xs</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">unfold</span> <a class="idref" href="DivConq.Rle.Rle.html#rle"><span class="id" title="definition">rle</span></a>, <a class="idref" href="DivConq.Rle.Rle.html#rle"><span class="id" title="definition">rle</span></a>; <span class="id" title="var">simpl'</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="DivConq.Rle.Rle.html#compressSpan"><span class="id" title="definition">compressSpan</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="DivConq.Span.Span.html#spanr"><span class="id" title="definition">spanr</span></a> (<a class="idref" href="DivConq.Dc.Dc.html#sfold"><span class="id" title="definition">sfold</span></a> (<a class="idref" href="DivConq.List.List.html#ListF"><span class="id" title="inductive">ListF</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.A"><span class="id" title="variable">A</span></a>)) (<a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <span class="id" title="var">h</span>) <span class="id" title="var">t</span>) <span class="id" title="keyword">as</span> (<span class="id" title="var">p</span>,<span class="id" title="var">s</span>) <span class="id" title="var">eqn</span>:<span class="id" title="var">e</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fold</span> (<a class="idref" href="DivConq.Rle.Rle.html#Rle"><span class="id" title="definition">Rle</span></a> <span class="id" title="var">s</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">ih</span> <span class="id" title="var">s</span> (<a class="idref" href="DivConq.Span.SpanPfs.MotivePres.html#motivePres"><span class="id" title="definition">motivePres</span></a> <span class="id" title="var">sfo</span> (<a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <span class="id" title="var">h</span>) <span class="id" title="var">t</span> <span class="id" title="var">H</span> <span class="id" title="var">e</span>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="DivConq.List.ExtraLib.html#Foralleqb"><span class="id" title="lemma">Foralleqb</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <a class="idref" href="DivConq.Rle.Rle.html#RLE.eq"><span class="id" title="variable">eq</span></a> <span class="id" title="var">h</span> <span class="id" title="var">p</span> (<a class="idref" href="DivConq.Span.SpanPfs.Forall.html#spanForall"><span class="id" title="definition">spanForall</span></a> <span class="id" title="var">fo</span> (<a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <span class="id" title="var">h</span>) <span class="id" title="var">t</span> <span class="id" title="var">H</span> <span class="id" title="var">e</span>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="DivConq.Span.SpanPfs.Append.html#spanAppend"><span class="id" title="definition">spanAppend</span></a> <span class="id" title="var">fo</span> (<a class="idref" href="DivConq.Rle.Rle.html#RLE.eqb"><span class="id" title="variable">eqb</span></a> <span class="id" title="var">h</span>) <span class="id" title="var">t</span> <span class="id" title="var">H</span> <span class="id" title="var">e</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="DivConq.Rle.Rle.html#RLE"><span class="id" title="section">RLE</span></a>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

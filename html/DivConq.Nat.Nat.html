@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Nat.Nat</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Nat.Nat</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab11"></a><h1 class="section">The Nat Datatype</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dc.html#"><span class="id" title="library">Dc</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Dci.html#"><span class="id" title="library">Dci</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Kinds.html#"><span class="id" title="library">Kinds</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Functors.html#"><span class="id" title="library">Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Mu.html#"><span class="id" title="library">Mu</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Nat.html#"><span class="id" title="library">Coq.Init.Nat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="NatF" class="idref" href="#NatF"><span class="id" title="inductive">NatF</span></a>(<a id="X:1" class="idref" href="#X:1"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="Zero" class="idref" href="#Zero"><span class="id" title="constructor">Zero</span></a> : <a class="idref" href="DivConq.Nat.Nat.html#NatF:2"><span class="id" title="inductive">NatF</span></a> <a class="idref" href="DivConq.Nat.Nat.html#X:1"><span class="id" title="variable">X</span></a><br/>
+| <a id="Succ" class="idref" href="#Succ"><span class="id" title="constructor">Succ</span></a> : <a class="idref" href="DivConq.Nat.Nat.html#X:1"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Nat.Nat.html#NatF:2"><span class="id" title="inductive">NatF</span></a> <a class="idref" href="DivConq.Nat.Nat.html#X:1"><span class="id" title="variable">X</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="DivConq.Nat.Nat.html#Zero"><span class="id" title="constructor">Zero</span></a> {<span class="id" title="var">X</span>}.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="DivConq.Nat.Nat.html#Succ"><span class="id" title="constructor">Succ</span></a> {<span class="id" title="var">X</span>} <span class="id" title="var">n</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Global Instance</span> <a id="FunListF" class="idref" href="#FunListF"><span class="id" title="instance">FunListF</span></a> : <a class="idref" href="DivConq.Dc.Functors.html#Functor"><span class="id" title="class">Functor</span></a> <a class="idref" href="DivConq.Nat.Nat.html#NatF"><span class="id" title="inductive">NatF</span></a> :=<br/>
+&nbsp;&nbsp;{<a class="idref" href="DivConq.Dc.Functors.html#fmap"><span class="id" title="method">fmap</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="R1:4" class="idref" href="#R1:4"><span class="id" title="binder">R1</span></a> <a id="R2:5" class="idref" href="#R2:5"><span class="id" title="binder">R2</span></a> <a id="f:6" class="idref" href="#f:6"><span class="id" title="binder">f</span></a> <a id="n:7" class="idref" href="#n:7"><span class="id" title="binder">n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇒ <span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Nat.Nat.html#n:7"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="DivConq.Nat.Nat.html#Zero"><span class="id" title="constructor">Zero</span></a> ⇒ <a class="idref" href="DivConq.Nat.Nat.html#Zero"><span class="id" title="constructor">Zero</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="DivConq.Nat.Nat.html#Succ"><span class="id" title="constructor">Succ</span></a> <span class="id" title="var">n</span> ⇒ <a class="idref" href="DivConq.Nat.Nat.html#Succ"><span class="id" title="constructor">Succ</span></a> (<a class="idref" href="DivConq.Nat.Nat.html#f:6"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.Nat.html#n:7"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Functors.html#fmapId"><span class="id" title="method">fmapId</span></a> := <span class="id" title="keyword">fun</span> <a id="A:9" class="idref" href="#A:9"><span class="id" title="binder">A</span></a> <a id="xs:10" class="idref" href="#xs:10"><span class="id" title="binder">xs</span></a> ⇒ <span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Nat.Nat.html#xs:10"><span class="id" title="variable">xs</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="DivConq.Nat.Nat.html#Zero"><span class="id" title="constructor">Zero</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a> | <a class="idref" href="DivConq.Nat.Nat.html#Succ"><span class="id" title="constructor">Succ</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The <span class="inlinecode"><a class="idref" href="DivConq.Nat.Nat.html#Nat"><span class="id" title="definition">Nat</span></a></span> datatype. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Nat" class="idref" href="#Nat"><span class="id" title="definition">Nat</span></a> := <a class="idref" href="DivConq.Dc.Dc.html#Dc"><span class="id" title="definition">Dc</span></a> <a class="idref" href="DivConq.Nat.Nat.html#NatF"><span class="id" title="inductive">NatF</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

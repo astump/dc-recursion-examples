@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Nat.NatWf</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Nat.NatWf</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab30"></a><h1 class="section">Well-Founded relation on <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span></h1>
+ Used in some lemmas for well-founded <span class="inlinecode"><a class="idref" href="DivConq.Rle.RleWf.html#RLE"><span class="id" title="section">RLE</span></a></span>.  
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Arith.PeanoNat.html#"><span class="id" title="library">PeanoNat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Arith.Lt.html#"><span class="id" title="library">Lt</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span> <span class="id" title="library">Signature</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span> <span class="id" title="var">p</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Well_founded_Nat" class="idref" href="#Well_founded_Nat"><span class="id" title="section">Well_founded_Nat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a id="Well_founded_Nat.A" class="idref" href="#Well_founded_Nat.A"><span class="id" title="variable">A</span></a> : <span class="id" title="keyword">Type</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a id="Well_founded_Nat.f" class="idref" href="#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> : <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="ltof" class="idref" href="#ltof"><span class="id" title="definition">ltof</span></a> (<a id="a:3" class="idref" href="#a:3"><span class="id" title="binder">a</span></a> <a id="b:4" class="idref" href="#b:4"><span class="id" title="binder">b</span></a>:<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.A"><span class="id" title="variable">A</span></a>) := <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:3"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#b:4"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="gtof" class="idref" href="#gtof"><span class="id" title="definition">gtof</span></a> (<a id="a:5" class="idref" href="#a:5"><span class="id" title="binder">a</span></a> <a id="b:6" class="idref" href="#b:6"><span class="id" title="binder">b</span></a>:<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.A"><span class="id" title="variable">A</span></a>) := <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#b:6"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:5"><span class="id" title="variable">a</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ltofLem" class="idref" href="#ltofLem"><span class="id" title="lemma">ltofLem</span></a> : <span class="id" title="keyword">∀</span>(<a id="a:7" class="idref" href="#a:7"><span class="id" title="binder">a</span></a> <a id="b:8" class="idref" href="#b:8"><span class="id" title="binder">b</span></a> : <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.A"><span class="id" title="variable">A</span></a>)(<a id="n:9" class="idref" href="#n:9"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:7"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#n:9"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#b:8"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:7"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#b:8"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#n:9"><span class="id" title="variable">n</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">n</span> <span class="id" title="var">Ha</span> <span class="id" title="var">Hb</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Arith.PeanoNat.html#Nat.lt_le_trans"><span class="id" title="lemma">Nat.lt_le_trans</span></a> <span class="id" title="keyword">with</span> (<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <span class="id" title="var">a</span>); <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">arith</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="Wf_ltf" class="idref" href="#Wf_ltf"><span class="id" title="lemma">Wf_ltf</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Wf.html#well_founded"><span class="id" title="definition">well_founded</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#ltof"><span class="id" title="definition">ltof</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span> : <span class="id" title="keyword">∀</span> <a id="n:12" class="idref" href="#n:12"><span class="id" title="binder">n</span></a> (<a id="a:13" class="idref" href="#a:13"><span class="id" title="binder">a</span></a>:<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.A"><span class="id" title="variable">A</span></a>), <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:11"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#n:10"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Wf.html#Acc"><span class="id" title="inductive">Acc</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#ltof"><span class="id" title="definition">ltof</span></a> <a class="idref" href="DivConq.Nat.NatWf.html#a:11"><span class="id" title="variable">a</span></a>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span>; <span class="id" title="var">absurd</span> (<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <span class="id" title="var">a</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 0); <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">arith</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">Ha</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Wf.html#Acc_intro"><span class="id" title="constructor">Acc_intro</span></a>. <span class="id" title="tactic">unfold</span> <a class="idref" href="DivConq.Nat.NatWf.html#ltof"><span class="id" title="definition">ltof</span></a> <span class="id" title="tactic">at</span> 1. <span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">Hb</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">exact</span> (<a class="idref" href="DivConq.Nat.NatWf.html#ltofLem"><span class="id" title="lemma">ltofLem</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">n</span> <span class="id" title="var">Ha</span> <span class="id" title="var">Hb</span>). }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>. <span class="id" title="tactic">apply</span> (<span class="id" title="var">H</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat.f"><span class="id" title="variable">f</span></a> <span class="id" title="var">a</span>))). <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">arith</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The <span class="inlinecode"><span class="id" title="class">WellFounded</span></span> is from the <span class="inlinecode"><span class="id" title="keyword">Equations</span></span> package. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a id="Wfltof" class="idref" href="#Wfltof"><span class="id" title="instance">Wfltof</span></a> : <span class="id" title="class">WellFounded</span> <a class="idref" href="DivConq.Nat.NatWf.html#ltof"><span class="id" title="definition">ltof</span></a> := <a class="idref" href="DivConq.Nat.NatWf.html#Wf_ltf"><span class="id" title="lemma">Wf_ltf</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="DivConq.Nat.NatWf.html#Well_founded_Nat"><span class="id" title="section">Well_founded_Nat</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

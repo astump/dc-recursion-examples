@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.FunctorGenerators.Example</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.FunctorGenerators.Example</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab36"></a><h1 class="section">Example Functorialization of list and tree datatypes.</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#"><span class="id" title="library">Functorializer</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We start by defining some example datatypes that we want to convert. We
+   stick to <span class="inlinecode"><span class="id" title="keyword">Set</span></span> for now in order to avoid dealing with universes.  
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="list'" class="idref" href="#list'"><span class="id" title="inductive">list'</span></a> (<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="nil'" class="idref" href="#nil'"><span class="id" title="constructor">nil'</span></a>  : <a class="idref" href="DivConq.FunctorGenerators.Example.html#list':2"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:1"><span class="id" title="variable">A</span></a><br/>
+| <a id="cons'" class="idref" href="#cons'"><span class="id" title="constructor">cons'</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:1"><span class="id" title="variable">A</span></a><br/>
+&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list':2"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:1"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list':2"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:1"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="tree" class="idref" href="#tree"><span class="id" title="inductive">tree</span></a> (<a id="A:4" class="idref" href="#A:4"><span class="id" title="binder">A</span></a> <a id="B:5" class="idref" href="#B:5"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="mempty" class="idref" href="#mempty"><span class="id" title="constructor">mempty</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree:6"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:4"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#B:5"><span class="id" title="variable">B</span></a><br/>
+| <a id="mnode" class="idref" href="#mnode"><span class="id" title="constructor">mnode</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:4"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#B:5"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree:6"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:4"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#B:5"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree:6"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:4"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#B:5"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree:6"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#A:4"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#B:5"><span class="id" title="variable">B</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Here are the kinds for the functorialization of lists, trees, and
+   strings (these strings are from the standard library): 
+</div>
+<div class="code">
+<span class="id" title="keyword">Example</span> <a id="listF_Kind" class="idref" href="#listF_Kind"><span class="id" title="definition">listF_Kind</span></a> : <span class="id" title="keyword">Type</span> := <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#listF_Kind"><span class="id" title="definition">listF_Kind</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a id="treeF_Kind" class="idref" href="#treeF_Kind"><span class="id" title="definition">treeF_Kind</span></a> : <span class="id" title="keyword">Type</span> := <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree"><span class="id" title="inductive">tree</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#treeF_Kind"><span class="id" title="definition">treeF_Kind</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a id="stringF_Kind" class="idref" href="#stringF_Kind"><span class="id" title="definition">stringF_Kind</span></a> : <span class="id" title="keyword">Type</span> := <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#stringF_Kind"><span class="id" title="definition">stringF_Kind</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Generating some example constructor descriptions for the
+   functorialization of lists, trees, and strings: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Example</span> <a id="listF_emb" class="idref" href="#listF_emb"><span class="id" title="definition">listF_emb</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#tsf_ctors_ty'"><span class="id" title="abbreviation">tsf_ctors_ty'</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">X</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span> <span class="id" title="var">buildFunCtors</span> <span class="id" title="var">X</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#fst_upper"><span class="id" title="definition">fst_upper</span></a>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#listF_emb"><span class="id" title="definition">listF_emb</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a id="treeF_emb" class="idref" href="#treeF_emb"><span class="id" title="definition">treeF_emb</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#tsf_ctors_ty'"><span class="id" title="abbreviation">tsf_ctors_ty'</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree"><span class="id" title="inductive">tree</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">X</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span> <span class="id" title="var">buildFunCtors</span> <span class="id" title="var">X</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#fst_upper"><span class="id" title="definition">fst_upper</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Example</span> <a id="stringF_emb" class="idref" href="#stringF_emb"><span class="id" title="definition">stringF_emb</span></a> : <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#tsf_ctors_ty'"><span class="id" title="abbreviation">tsf_ctors_ty'</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">buildFunKind</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">X</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span> <span class="id" title="var">buildFunCtors</span> <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> (<span class="id" title="keyword">fun</span> <a id="s:9" class="idref" href="#s:9"><span class="id" title="binder">s</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#append"><span class="id" title="definition">append</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#s:8"><span class="id" title="variable">s</span></a> "F")).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Generate the functorial representaion of lists: 
+</div>
+<div class="code">
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor"><span class="id" title="abbreviation">gen_functor</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a> "listF" <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#fst_upper"><span class="id" title="definition">fst_upper</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#listF"><span class="id" title="inductive">listF</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We can also generate the functorial representation of other types 
+</div>
+<div class="code">
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor"><span class="id" title="abbreviation">gen_functor</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> "stringF" (<span class="id" title="keyword">fun</span> <a id="s:15" class="idref" href="#s:15"><span class="id" title="binder">s</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#append"><span class="id" title="definition">append</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#s:10"><span class="id" title="variable">s</span></a> "F")).<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor"><span class="id" title="abbreviation">gen_functor</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree"><span class="id" title="inductive">tree</span></a> "treeF" <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#fst_upper"><span class="id" title="definition">fst_upper</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#stringF"><span class="id" title="inductive">stringF</span></a>.<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#treeF"><span class="id" title="inductive">treeF</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We can also generate the definitions associated with each functorial representation
+   such as smart constructors, the Functor instance, Fold and more 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="gen_stringF_defs" class="idref" href="#gen_stringF_defs"><span class="id" title="definition">gen_stringF_defs</span></a> := <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor_defs"><span class="id" title="abbreviation">gen_functor_defs</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#stringF"><span class="id" title="inductive">stringF</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Example.html#gen_stringF_defs"><span class="id" title="definition">gen_stringF_defs</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="gen_listF_defs" class="idref" href="#gen_listF_defs"><span class="id" title="definition">gen_listF_defs</span></a> := <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor_defs"><span class="id" title="abbreviation">gen_functor_defs</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#listF"><span class="id" title="inductive">listF</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Example.html#gen_listF_defs"><span class="id" title="definition">gen_listF_defs</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="gen_treeF_defs" class="idref" href="#gen_treeF_defs"><span class="id" title="definition">gen_treeF_defs</span></a> := <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor_defs"><span class="id" title="abbreviation">gen_functor_defs</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#treeF"><span class="id" title="inductive">treeF</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Example.html#gen_treeF_defs"><span class="id" title="definition">gen_treeF_defs</span></a>).<br/>
+
+<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor"><span class="id" title="abbreviation">gen_functor</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> "ListF" <a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#fst_upper"><span class="id" title="definition">fst_upper</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="DivConq.FunctorGenerators.Example.html#ListF"><span class="id" title="inductive">ListF</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="gen_ListF_defs" class="idref" href="#gen_ListF_defs"><span class="id" title="definition">gen_ListF_defs</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="DivConq.FunctorGenerators.Functorializer.html#gen_functor_defs_named"><span class="id" title="abbreviation">gen_functor_defs_named</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#list'"><span class="id" title="inductive">list'</span></a> <a class="idref" href="DivConq.FunctorGenerators.Example.html#ListF"><span class="id" title="inductive">ListF</span></a> "Listmap" "ListmapId" "FunListF" "List"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"inList" "outList" "listFold" "ListFoldT" "ListSFoldT"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"toList" "fromListr" "fromList".<br/>
+
+<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="DivConq.FunctorGenerators.Example.html#gen_ListF_defs"><span class="id" title="definition">gen_ListF_defs</span></a>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

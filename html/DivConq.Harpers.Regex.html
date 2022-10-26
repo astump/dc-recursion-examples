@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Harpers.Regex</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Harpers.Regex</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab12"></a><h1 class="section">Harper's Matcher Regular Expression Inductive Datatype</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.Ascii.html#"><span class="id" title="library">Coq.Strings.Ascii</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.List.List.html#"><span class="id" title="library">List.List</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="Char" class="idref" href="#Char"><span class="id" title="definition">Char</span></a>   : <span class="id" title="keyword">Set</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Strings.Ascii.html#ascii"><span class="id" title="inductive">ascii</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="string" class="idref" href="#string"><span class="id" title="definition">string</span></a> : <span class="id" title="keyword">Set</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Char"><span class="id" title="definition">Char</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="String" class="idref" href="#String"><span class="id" title="definition">String</span></a> : <span class="id" title="keyword">Set</span> := <a class="idref" href="DivConq.List.List.html#List"><span class="id" title="definition">List</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Char"><span class="id" title="definition">Char</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="Regex" class="idref" href="#Regex"><span class="id" title="inductive">Regex</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<a id="NoMatch" class="idref" href="#NoMatch"><span class="id" title="constructor">NoMatch</span></a>   : <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a><br/>
+| <a id="MatchChar" class="idref" href="#MatchChar"><span class="id" title="constructor">MatchChar</span></a> : <a class="idref" href="DivConq.Harpers.Regex.html#Char"><span class="id" title="definition">Char</span></a>  <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a><br/>
+| <a id="Or" class="idref" href="#Or"><span class="id" title="constructor">Or</span></a>        : <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a><br/>
+| <a id="Plus" class="idref" href="#Plus"><span class="id" title="constructor">Plus</span></a>      : <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a><br/>
+| <a id="Concat" class="idref" href="#Concat"><span class="id" title="constructor">Concat</span></a>    : <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Harpers.Regex.html#Regex:1"><span class="id" title="inductive">Regex</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

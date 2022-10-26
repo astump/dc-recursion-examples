@@ -1,0 +1,57 @@
+-arg -impredicative-set
+-R . DivConq
+
+Dc/Kinds.v
+Dc/CastAlg.v
+Dc/Functors.v
+Dc/Mu.v
+Dc/Mui.v
+Dc/Dc.v
+Dc/Dci.v
+
+List/List.v
+List/ExtraLib.v
+List/SmallerListWf.v
+
+Nat/Nat.v
+
+Harpers/Regex.v
+Harpers/Matcher.v
+
+Mergesort/MergesortProofs.v
+Mergesort/Mergesort.v
+Mergesort/MergesortWf.v
+
+Quicksort/Quicksort.v
+Quicksort/QuicksortWf.v
+Quicksort/QuicksortProofs.v
+Quicksort/PartitionSimple.v
+Quicksort/PartitionSimpleProofs.v
+
+Span/Span.v
+Span/SpanPfs/Append.v
+Span/SpanPfs/Forall.v
+Span/SpanPfs/MotivePres.v
+
+Wordsby/WordsBy.v
+
+Rle/Rld.v
+Rle/MapThrough.v
+Rle/Rle.v
+
+# ------------------------------------------------------------------------------
+# Equations stuff
+# ------------------------------------------------------------------------------
+
+Nat/NatWf.v
+Wordsby/WordsByWf.v
+Wordsby/WordsByEq.v
+Rle/MapThroughWf.v
+Rle/RleWf.v
+
+# --------------------------------------------------------------------------------
+# MetaCoq Stuff
+# --------------------------------------------------------------------------------
+
+FunctorGenerators/Functorializer.v
+FunctorGenerators/Example.v

@@ -1,0 +1,4 @@
+eval "$(opam env)"
+make all
+make html
+

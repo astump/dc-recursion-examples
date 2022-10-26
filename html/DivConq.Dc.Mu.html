@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>DivConq.Dc.Mu</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library DivConq.Dc.Mu</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab4"></a><h1 class="section">Mu.V</h1>
+ Derivation of "positive-retractive" types. <span class="inlinecode"><a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a></span> is a least fixed-point
+operator for signature functors which are positive (but needn't be strictly
+positive). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Kinds.html#"><span class="id" title="library">Kinds</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.CastAlg.html#"><span class="id" title="library">CastAlg</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="DivConq.Dc.Functors.html#"><span class="id" title="library">Functors</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Setoids.Setoid.html#"><span class="id" title="library">Coq.Setoids.Setoid</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Mu" class="idref" href="#Mu"><span class="id" title="section">Mu</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="Mu.F" class="idref" href="#Mu.F"><span class="id" title="variable">F</span></a> : <span class="id" title="keyword">Set</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="FunF:2" class="idref" href="#FunF:2"><span class="id" title="binder">FunF</span></a> : <a class="idref" href="DivConq.Dc.Functors.html#Functor"><span class="id" title="class">Functor</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a>}.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MAlgebra" class="idref" href="#MAlgebra"><span class="id" title="definition">MAlgebra</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="A:3" class="idref" href="#A:3"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Set</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="R:4" class="idref" href="#R:4"><span class="id" title="binder">R</span></a> : <span class="id" title="keyword">Set</span>), <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="DivConq.Dc.Mu.html#R:4"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:3"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#R:4"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:3"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="Mu" class="idref" href="#Mu"><span class="id" title="inductive">Mu</span></a> : <span class="id" title="keyword">Set</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="mu" class="idref" href="#mu"><span class="id" title="constructor">mu</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#MAlgebra"><span class="id" title="definition">MAlgebra</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu:5"><span class="id" title="inductive">Mu</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="inMu" class="idref" href="#inMu"><span class="id" title="definition">inMu</span></a>(<a id="d:7" class="idref" href="#d:7"><span class="id" title="binder">d</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>) : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#mu"><span class="id" title="constructor">mu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> (<span class="id" title="keyword">fun</span> <a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#x:8"><span class="id" title="variable">x</span></a>) <a class="idref" href="DivConq.Dc.Mu.html#d:7"><span class="id" title="variable">d</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="outMu" class="idref" href="#outMu"><span class="id" title="definition">outMu</span></a>(<a id="m:9" class="idref" href="#m:9"><span class="id" title="binder">m</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>) : <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Dc.Mu.html#m:9"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="DivConq.Dc.Mu.html#mu"><span class="id" title="constructor">mu</span></a> <span class="id" title="var">A</span> <span class="id" title="var">r</span> <span class="id" title="var">d</span> ⇒ <a class="idref" href="DivConq.Dc.Functors.html#fmap"><span class="id" title="method">fmap</span></a> <span class="id" title="var">r</span> <span class="id" title="var">d</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="retraction" class="idref" href="#retraction"><span class="id" title="definition">retraction</span></a> : <span class="id" title="keyword">∀</span>(<a id="d:11" class="idref" href="#d:11"><span class="id" title="binder">d</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>), <a class="idref" href="DivConq.Dc.Mu.html#outMu"><span class="id" title="definition">outMu</span></a> (<a class="idref" href="DivConq.Dc.Mu.html#inMu"><span class="id" title="definition">inMu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#d:11"><span class="id" title="variable">d</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="DivConq.Dc.Mu.html#d:11"><span class="id" title="variable">d</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">d</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="DivConq.Dc.Functors.html#fmapId"><span class="id" title="method">fmapId</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The definitions below show that canonicity can be recovered using a
+normalization equivalence relation; these definitions are not used elsewhere in
+our development, though. 
+</div>
+<div class="code">
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="IndMu" class="idref" href="#IndMu"><span class="id" title="definition">IndMu</span></a>(<a id="m:12" class="idref" href="#m:12"><span class="id" title="binder">m</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>) : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="X:13" class="idref" href="#X:13"><span class="id" title="binder">X</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span>(<a id="R:14" class="idref" href="#R:14"><span class="id" title="binder">R</span></a>:<span class="id" title="keyword">Set</span>)(<a id="reveal:15" class="idref" href="#reveal:15"><span class="id" title="binder">reveal</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#R:14"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="r:16" class="idref" href="#r:16"><span class="id" title="binder">r</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#R:14"><span class="id" title="variable">R</span></a>, <a class="idref" href="DivConq.Dc.Mu.html#X:13"><span class="id" title="variable">X</span></a> (<a class="idref" href="DivConq.Dc.Mu.html#reveal:15"><span class="id" title="variable">reveal</span></a> <a class="idref" href="DivConq.Dc.Mu.html#r:16"><span class="id" title="variable">r</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="d:17" class="idref" href="#d:17"><span class="id" title="binder">d</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#R:14"><span class="id" title="variable">R</span></a> ,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#X:13"><span class="id" title="variable">X</span></a> (<a class="idref" href="DivConq.Dc.Mu.html#mu"><span class="id" title="constructor">mu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#R:14"><span class="id" title="variable">R</span></a> <a class="idref" href="DivConq.Dc.Mu.html#reveal:15"><span class="id" title="variable">reveal</span></a> <a class="idref" href="DivConq.Dc.Mu.html#d:17"><span class="id" title="variable">d</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)-&gt;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#X:13"><span class="id" title="variable">X</span></a> <a class="idref" href="DivConq.Dc.Mu.html#m:12"><span class="id" title="variable">m</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <a id="Mu_fold" class="idref" href="#Mu_fold"><span class="id" title="definition">Mu_fold</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="A:18" class="idref" href="#A:18"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Set</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="alg:19" class="idref" href="#alg:19"><span class="id" title="binder">alg</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#MAlgebra"><span class="id" title="definition">MAlgebra</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:18"><span class="id" title="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="m:20" class="idref" href="#m:20"><span class="id" title="binder">m</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="keyword">struct</span> <span class="id" title="var">m</span>} : <a class="idref" href="DivConq.Dc.Mu.html#A:18"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Dc.Mu.html#m:20"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#mu"><span class="id" title="constructor">mu</span></a> <span class="id" title="var">A</span> <span class="id" title="var">reveal</span> <span class="id" title="var">d</span> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#alg:19"><span class="id" title="variable">alg</span></a> <span class="id" title="var">_</span> (<span class="id" title="keyword">fun</span> <a id="r:23" class="idref" href="#r:23"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#Mu_fold:21"><span class="id" title="definition">Mu_fold</span></a> <a class="idref" href="DivConq.Dc.Mu.html#alg:19"><span class="id" title="variable">alg</span></a> (<span class="id" title="var">reveal</span> <a class="idref" href="DivConq.Dc.Mu.html#r:23"><span class="id" title="variable">r</span></a>) ) <span class="id" title="var">d</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="normalize_Mu" class="idref" href="#normalize_Mu"><span class="id" title="definition">normalize_Mu</span></a> (<a id="m:24" class="idref" href="#m:24"><span class="id" title="binder">m</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>) : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#Mu_fold"><span class="id" title="definition">Mu_fold</span></a> (<span class="id" title="keyword">fun</span> <a id="R:25" class="idref" href="#R:25"><span class="id" title="binder">R</span></a> <a id="rec:26" class="idref" href="#rec:26"><span class="id" title="binder">rec</span></a> <a id="fr:27" class="idref" href="#fr:27"><span class="id" title="binder">fr</span></a> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#inMu"><span class="id" title="definition">inMu</span></a> (<a class="idref" href="DivConq.Dc.Functors.html#fmap"><span class="id" title="method">fmap</span></a> <a class="idref" href="DivConq.Dc.Mu.html#rec:26"><span class="id" title="variable">rec</span></a> <a class="idref" href="DivConq.Dc.Mu.html#fr:27"><span class="id" title="variable">fr</span></a>)) <a class="idref" href="DivConq.Dc.Mu.html#m:24"><span class="id" title="variable">m</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Mu_equiv" class="idref" href="#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a> (<a id="m1:28" class="idref" href="#m1:28"><span class="id" title="binder">m1</span></a> <a id="m2:29" class="idref" href="#m2:29"><span class="id" title="binder">m2</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a>) : <span class="id" title="keyword">Prop</span> := <a class="idref" href="DivConq.Dc.Mu.html#normalize_Mu"><span class="id" title="definition">normalize_Mu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#m1:28"><span class="id" title="variable">m1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="DivConq.Dc.Mu.html#normalize_Mu"><span class="id" title="definition">normalize_Mu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#m2:29"><span class="id" title="variable">m2</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="Mu_equiv_refl" class="idref" href="#Mu_equiv_refl"><span class="id" title="lemma">Mu_equiv_refl</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Reflexive"><span class="id" title="class">Reflexive</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Reflexive"><span class="id" title="class">Reflexive</span></a>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="Mu_equiv_sym" class="idref" href="#Mu_equiv_sym"><span class="id" title="lemma">Mu_equiv_sym</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Symmetric"><span class="id" title="class">Symmetric</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Symmetric"><span class="id" title="class">Symmetric</span></a>; <span class="id" title="tactic">symmetry</span>; <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="Mu_equiv_trans" class="idref" href="#Mu_equiv_trans"><span class="id" title="lemma">Mu_equiv_trans</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Transitive"><span class="id" title="class">Transitive</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Classes.RelationClasses.html#Transitive"><span class="id" title="class">Transitive</span></a>; <span class="id" title="var">etransitivity</span>; <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Add</span> <span class="id" title="var">Relation</span> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span> <span class="id" title="var">proved</span> <span class="id" title="tactic">by</span> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv_refl"><span class="id" title="lemma">Mu_equiv_refl</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span> <span class="id" title="var">proved</span> <span class="id" title="tactic">by</span> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv_sym"><span class="id" title="lemma">Mu_equiv_sym</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">transitivity</span> <span class="id" title="var">proved</span> <span class="id" title="tactic">by</span> <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv_trans"><span class="id" title="lemma">Mu_equiv_trans</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> <span class="id" title="var">Mu_equiv_rel</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="5481f03e8be2772949bd9faf204bbaab" class="idref" href="#5481f03e8be2772949bd9faf204bbaab"><span class="id" title="notation">&quot;</span></a>≈" := <a class="idref" href="DivConq.Dc.Mu.html#Mu_equiv"><span class="id" title="definition">Mu_equiv</span></a> (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 90).<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="section">Mu</span></a>.<br/>
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+   Higher-ordered <span class="inlinecode"><a class="idref" href="DivConq.Dc.Mu.html#Mu"><span class="id" title="inductive">Mu</span></a></span> over <span class="inlinecode"><a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a></span>.
+   This permits non-strictly positive occurrences of <span class="inlinecode"><a class="idref" href="DivConq.Dc.Dc.html#Alg"><span class="id" title="definition">Alg</span></a></span> in defining
+   <span class="inlinecode"><a class="idref" href="DivConq.Dc.Dc.html#Alg"><span class="id" title="definition">Alg</span></a></span> via its (higher ordered) <span class="inlinecode"><a class="idref" href="DivConq.Dc.Dci.html#AlgF"><span class="id" title="definition">AlgF</span></a></span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="MuAlg" class="idref" href="#MuAlg"><span class="id" title="section">MuAlg</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="MuAlg.F" class="idref" href="#MuAlg.F"><span class="id" title="variable">F</span></a> : <a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="MuAlg.algMap" class="idref" href="#MuAlg.algMap"><span class="id" title="variable">algMap</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:31" class="idref" href="#A:31"><span class="id" title="binder">A</span></a> <a id="B:32" class="idref" href="#B:32"><span class="id" title="binder">B</span></a> : <a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a>}, <a class="idref" href="DivConq.Dc.CastAlg.html#CastAlg"><span class="id" title="definition">CastAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:31"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Dc.Mu.html#B:32"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.CastAlg.html#CastAlg"><span class="id" title="definition">CastAlg</span></a> (<a class="idref" href="DivConq.Dc.Mu.html#MuAlg.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:31"><span class="id" title="variable">A</span></a>) (<a class="idref" href="DivConq.Dc.Mu.html#MuAlg.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#B:32"><span class="id" title="variable">B</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="MuAlg" class="idref" href="#MuAlg"><span class="id" title="inductive">MuAlg</span></a> : <a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a> := <br/>
+&nbsp;&nbsp;<a id="muAlg" class="idref" href="#muAlg"><span class="id" title="constructor">muAlg</span></a> : <span class="id" title="keyword">∀</span> <a id="A:36" class="idref" href="#A:36"><span class="id" title="binder">A</span></a> : <a class="idref" href="DivConq.Dc.Kinds.html#KAlg"><span class="id" title="definition">KAlg</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="X:37" class="idref" href="#X:37"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>), <a class="idref" href="DivConq.Dc.Mu.html#A:36"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:37"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg:34"><span class="id" title="inductive">MuAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:37"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="X:38" class="idref" href="#X:38"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>), <a class="idref" href="DivConq.Dc.Mu.html#MuAlg.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#A:36"><span class="id" title="variable">A</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:38"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg:34"><span class="id" title="inductive">MuAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:38"><span class="id" title="variable">X</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="inMuAlg" class="idref" href="#inMuAlg"><span class="id" title="definition">inMuAlg</span></a> {<a id="X:39" class="idref" href="#X:39"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>} (<a id="d:40" class="idref" href="#d:40"><span class="id" title="binder">d</span></a> : (<a class="idref" href="DivConq.Dc.Mu.html#MuAlg.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="inductive">MuAlg</span></a>) <a class="idref" href="DivConq.Dc.Mu.html#X:39"><span class="id" title="variable">X</span></a>) : <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="inductive">MuAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:39"><span class="id" title="variable">X</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="DivConq.Dc.Mu.html#muAlg"><span class="id" title="constructor">muAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="inductive">MuAlg</span></a> (<span class="id" title="keyword">fun</span> <a id="X:41" class="idref" href="#X:41"><span class="id" title="binder">X</span></a> <a id="x:42" class="idref" href="#x:42"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#x:42"><span class="id" title="variable">x</span></a>) <a class="idref" href="DivConq.Dc.Mu.html#X:39"><span class="id" title="variable">X</span></a> <a class="idref" href="DivConq.Dc.Mu.html#d:40"><span class="id" title="variable">d</span></a>.<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="outMuAlg" class="idref" href="#outMuAlg"><span class="id" title="definition">outMuAlg</span></a>{<a id="X:43" class="idref" href="#X:43"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.13.2/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>} (<a id="v:44" class="idref" href="#v:44"><span class="id" title="binder">v</span></a> : <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="inductive">MuAlg</span></a> <a class="idref" href="DivConq.Dc.Mu.html#X:43"><span class="id" title="variable">X</span></a>) : (<a class="idref" href="DivConq.Dc.Mu.html#MuAlg.F"><span class="id" title="variable">F</span></a> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="inductive">MuAlg</span></a>) <a class="idref" href="DivConq.Dc.Mu.html#X:43"><span class="id" title="variable">X</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="DivConq.Dc.Mu.html#v:44"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="DivConq.Dc.Mu.html#muAlg"><span class="id" title="constructor">muAlg</span></a> <span class="id" title="var">A</span> <span class="id" title="var">r</span> <span class="id" title="var">X1</span> <span class="id" title="var">d</span> ⇒ <a class="idref" href="DivConq.Dc.Mu.html#MuAlg.algMap"><span class="id" title="variable">algMap</span></a> <span class="id" title="var">r</span> <span class="id" title="var">X1</span> <span class="id" title="var">d</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="DivConq.Dc.Mu.html#MuAlg"><span class="id" title="section">MuAlg</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
