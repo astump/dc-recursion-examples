@@ -80,6 +80,7 @@ Defined.
 
 Arguments HCons [x ls] _ _ _.
 Arguments hget [ls].
+Arguments hmap [ls].
 
 Inductive list' (A : Type) : Type :=
 | nil'  : list' A
@@ -198,7 +199,7 @@ Definition getTerm (q : qualid) : TemplateMonad typed_term :=
       | _ => tmFail ("[" ^ q ^ "] is not an inductive")
   end.
 
-Definition ind_name {T : Type} (t : T) :=
+Definition inductive_name {T : Type} (t : T) :=
           t <- tmQuote t;;
           name <- match t with
                      | tInd {| inductive_mind := (_, name) |} _ => tmReturn name
@@ -293,7 +294,7 @@ Ltac buildFunCtors X T f:=
                                                    | forall A : ?S, ?U => refine (forall (A : S), _); genFunCtor U
                                                    (* If Cty appears as the return type, change it to R *)
                                                    | Cty => exact R
-                                                                 (* TODO: Add other cases for more complex datatypes *)
+                                                   (* TODO: Add other cases for more complex datatypes *)
                                                end in
                       genFunCtor ctorTy).
 
@@ -309,10 +310,10 @@ Inductive ltac_Mark : Type :=
 
 Ltac gen_until_mark :=
   match goal with H: ?U |- _ =>
-  match U with
-  | ltac_Mark => clear H
-  | _ => generalize H; clear H; gen_until_mark
-  end end.
+    match U with
+    | ltac_Mark => clear H
+    | _ => generalize H; clear H; gen_until_mark
+    end end.
 
 Ltac intro_until_mark :=
   match goal with
@@ -340,8 +341,8 @@ Ltac markT T :=
     | _ => idtac
   end.
 
-Inductive Param : Set -> nat -> Type :=
-| param : forall (A : Set) (n : nat), Param A n.
+Inductive Param : Type -> nat -> Type :=
+| param : forall (A : Type) (n : nat), Param A n.
 
 Ltac markparam H H' :=
   pose proof (param H) as H'.
@@ -353,11 +354,11 @@ Ltac mark_param S n :=
 
 Ltac refine_params S :=
   let rec go U n := match U with
-                      | forall (A : Set), ?V => refine (forall (A: Set), (_ : Set));
+                      | forall (A : Set), ?V => refine (forall (A: Set), _ );
                                           mark_param A n;
                                           let n := eval simpl in (n+1) in
                                           go V n
-                      | forall (A : Type), ?V => refine (forall (A: Set), (_ : Set));
+                      | forall (A : Type), ?V => refine (forall (A: Set), _);
                                           mark_param A n;
                                           let n := eval simpl in (n+1) in
                                           go V n
@@ -376,22 +377,6 @@ Ltac nparam S :=
                     end in
   let SU := type of S in
    go SU 0.
-
-Ltac refine_params' S :=
-  let rec go U n := match U with
-                      | forall (A : Set), ?V => refine (forall (A: Set), (_ : Type));
-                                          mark_param A n;
-                                          let n := eval simpl in (n+1) in
-                                          go V n
-                      | forall (A : Type), ?V => refine (forall (A: Set), (_ : Type));
-                                          mark_param A n;
-                                          let n := eval simpl in (n+1) in
-                                          go V n
-                      | _ => idtac
-                  end in
-  let SU := type of S in
-  go SU constr:(0).
-
 
 Ltac buildApp U :=
   lazymatch goal with
@@ -555,7 +540,7 @@ Ltac tfFunctor T tfMapId :=
 
 Ltac dctf_kind T :=
   markT T;
-  refine_params' T; exact Set.
+  refine_params T; exact Set.
 
 Ltac dctf T TF :=
   markT T;
@@ -662,7 +647,7 @@ Ltac buildFold T TF :=
 
 Ltac tfoldT_kind T :=
   markT T;
-  refine_params' T;
+  refine_params T;
   let R := fresh "R" in
   refine (forall (R : Set), Set).
 
@@ -745,8 +730,8 @@ Ltac mkkinds T TF DCTF :=
   markT T;
   let rec rparams U H :=
     lazymatch U with
-        | forall (A : ?S), ?V =>
-            let x := fresh "x" in
+        | forall (x : ?S), ?V =>
+            let x := fresh x in
             refine (forall (x : S), (_ : Set));
             specialize (H x);
             rparams V H
@@ -788,8 +773,12 @@ Ltac smart_constrs T TF DCTF inTF :=
               fun ctor => let H := fresh "K" in
                        pose (ctor D) as H;
                        (* Instantiate the arguments of the constructor one by one *)
-                       repeat (let A := fresh "arg" in intro A; specialize (H A); clear A);
-                       apply inTF; exact H
+                       repeat (match goal with
+                                   | |- forall (k : _), ?U => let k := fresh k in intro k; specialize (H k); clear k
+                       end);
+                       (* let A := fresh "arg" in intro A; specialize (H A); clear A); *)
+                       apply inTF;
+                       exact H
               )
                 | process xs]
         | _ => exact HNil
@@ -810,7 +799,6 @@ Ltac tsf_ctors_to_tm' ctors :=
             | _ => quote_term P (fun P => refine ((n, P) :: _))
             end
         end; go xs
-
     | _ => refine ([])
     end in
   (* Not ideal. If parts of [ctors] are defined as definitions, we need to
@@ -847,26 +835,38 @@ Notation gen_functor_defs_named T TF mapname mapidname functorname
   let mks : hlist mk_kinds := ltac:(smart_constrs T TF DCTF inTF) in
   let tfname := functorname in
   (* Declare Definitions *)
+  TFMap <- tmEval cbn TFMap;;
   tmDefinition mapname TFMap;;
+  TFMapId <- tmEval cbn TFMapId;;
   tmDefinition mapidname TFMapId;;
+  TFunctor <- tmEval cbn TFunctor;;
   tmDefinition tfname TFunctor;;
   currModPath <- tmCurrentModPath tt;;
   tmExistingInstance (ConstRef (currModPath, tfname));;
+  DCTF <- tmEval cbn DCTF;;
   tmDefinition dcname DCTF;;
-  tmDefinition inname inTF;;
-  tmDefinition outname outTF;;
+  inTF <- tmEval cbn inTF;;
+  tmDefinitionRed inname (Some cbn) inTF;;
+  outTF <- tmEval cbn outTF;;
+  tmDefinitionRed outname (Some cbn) outTF;;
+  tFold <- tmEval cbn tFold;;
   tmDefinition foldname tFold;;
+  tFoldT <- tmEval cbn tFoldT;;
   tmDefinition foldTname tFoldT;;
+  tsFoldT <- tmEval cbn tsFoldT;;
   tmDefinition sfoldTname tsFoldT;;
-  tmDefinition toname toDCTF;;
-  tmDefinition fromrname fromdctfr;;
-  tmDefinition froname fromdctf;;
-  (* Define the smart constructors *)
-  hmap mk_kinds mks tmDefinition;;
+  toDCTF <- tmEval cbn toDCTF;;
+  tmDefinitionRed toname (Some cbn) toDCTF;;
+  fromdctfr <- tmEval cbn fromdctfr;;
+  tmDefinitionRed fromrname (Some cbn) fromdctfr;;
+  fromdctf <- tmEval cbn fromdctf;;
+  tmDefinitionRed froname (Some cbn) fromdctf;;
+  mks <- tmEval cbn mks;;
+  hmap mks (fun s (A : Type) => tmDefinitionRed s (Some cbn));;
   tmReturn tt) (only parsing).
 
 Notation gen_functor_defs T TF :=
-  (TFName <- ind_name TF;;
+  (TFName <- inductive_name TF;;
    let mapname := (TFName ^ "Map") in
    let mapidname := (TFName ^ "MapId") in
    let functorname := (TFName ^ "Functor") in

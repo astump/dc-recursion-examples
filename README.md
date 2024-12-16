@@ -1,9 +1,10 @@
 # A Type-Based Approach to Divide-And-Conquer Recursion in Coq
 
-Artifact for POPL'23 paper "A Type-Based Approach to Divide-And-Conquer
-Recursion in Coq". This README is available in both [Markdown](./README.md) and
-[PDF](./README.pdf) format.
-
+Artifact for the JFP submission, "AType-BasedApproach to
+Divide-and-Conquer Recursion". This is an expanded version of the
+artifact for the POPL'23 paper "A Type-Based Approach to
+Divide-And-Conquer Recursion in Coq". This README is available in both
+[Markdown](./README.md) and [PDF](./README.pdf) format.
 
 # Installation
 
@@ -53,6 +54,7 @@ This will build all of the coq files & documentation. Documentation is placed in
 
 Once the container is built and running, you can shell into it via
 
+
 ```sh
 docker exec -ti dc-container sh
 ```
@@ -70,8 +72,8 @@ this docker container (or, locally, if you have chosen manual installation).
 
 If you ever need to wipe the whole thing and start over, run
 ```sh
- docker container stop dc-container; 
- docker container rm dc-container; 
+ docker container stop dc-container;
+ docker container rm dc-container;
  docker volume rm dc;
 ```
 

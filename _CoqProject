@@ -54,4 +54,5 @@ Rle/RleWf.v
 # --------------------------------------------------------------------------------
 
 FunctorGenerators/Functorializer.v
+FunctorGenerators/Induction.v
 FunctorGenerators/Example.v
